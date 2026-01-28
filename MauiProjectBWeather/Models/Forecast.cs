@@ -1,12 +1,15 @@
-﻿using System;
+﻿using MauiProjectBWeather.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MauiProjectBWeather.Models
+#nullable enable
+namespace MauiProjectBWeather.Models;
+
+public class Forecast
 {
-    public class Forecast
-    {
-        public string City { get; set; }
-        public List<ForecastItem> Items { get; set; }
-    }
+    public string? City { get; set; }
+    public List<ForecastItem>? Items { get; set; }
 }
+#nullable restore
+
