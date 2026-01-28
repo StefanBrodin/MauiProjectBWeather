@@ -9,8 +9,10 @@
     Title="MauiProjectBWeather">
 
     <ShellContent
-        Title="Maui hello"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="mauihello" />
+        Title="About Weather"
+        ContentTemplate="{DataTemplate views:AboutPage}"
+        Route="about" />
+    
+
 
 </Shell>
