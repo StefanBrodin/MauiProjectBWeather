@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiProjectBWeather.Views.NewPage1"
+             Title="About Skruffis Weather">
+    <VerticalStackLayout Padding="30" Spacing="20">
+        <Label 
+            Text="About Scruffis Weather App"
+            FontSize="24"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
+            Text="Created by Stefan Brodin"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
+            Text="Version: 1.0. 2026-01-28."
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label 
+            Text="https://github.com/StefanBrodin/MauiProjectBWeather.git"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
