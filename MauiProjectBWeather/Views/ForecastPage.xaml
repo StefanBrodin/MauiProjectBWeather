@@ -11,7 +11,7 @@
                     <DataTemplate>
                         <ViewCell Height="40">
                             <Grid HeightRequest="40" BackgroundColor="White" Padding="5">
-                                <Label FontSize="16" TextColor="Blue" VerticalOptions="Center" Text="{Binding Key, StringFormat='{0:D}'}" />
+                                <Label FontSize="24" TextColor="DarkBlue" VerticalOptions="Center" Text="{Binding Key, StringFormat='{0:D}'}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -25,8 +25,8 @@
                                     <Label Grid.Row="0" FontSize="12" FontAttributes="Bold" Text="{Binding DateTime, StringFormat='{0:t}'}"/>
                                     <Label Grid.Row="1" FontAttributes="Bold" Text="{Binding Description}"/>
                                     <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto">
-                                        <Label Grid.Column="0" Text="{Binding Temperature, StringFormat='Temperature: {0}°C'}" Margin="0,0,10,0"/>
-                                        <Label Grid.Column="1" Text="{Binding WindSpeed, StringFormat='Windspeed: {0}m/s'}"/>
+                                        <Label Grid.Column="0" Text="{Binding Temperature, StringFormat='Temperatur: {0:F1}°C'}" Margin="0,0,10,0"/>
+                                        <Label Grid.Column="1" Text="{Binding WindSpeed, StringFormat='Vind: {0:F1}m/s'}"/>
                                     </Grid>
                                 </Grid>
                             </Grid>

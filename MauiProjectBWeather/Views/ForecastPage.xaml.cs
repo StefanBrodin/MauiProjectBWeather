@@ -24,7 +24,7 @@ namespace MauiProjectBWeather.Views
         public ForecastPage(CityPicture city)
         {
             InitializeComponent();
- 
+
             _city = city;
             _service = new OpenWeatherService();
         }
@@ -34,7 +34,7 @@ namespace MauiProjectBWeather.Views
             base.OnAppearing();
             Title = $"Forecast for {_city.Name}";
 
-            MainThread.BeginInvokeOnMainThread(async () => {await LoadForecast();});
+            MainThread.BeginInvokeOnMainThread(async () => { await LoadForecast(); });
         }
         private async void Button_Clicked(object sender, EventArgs e)
         {
@@ -43,7 +43,38 @@ namespace MauiProjectBWeather.Views
 
         private async Task LoadForecast()
         {
+            // 1. Load the forecast data from the service
             Forecast forecast = await _service.GetForecastAsync(_city.Name);
+
+            // 2. Since IsGroupingEnabled="true" in the XAML ListView, and has a GroupHeaderTemplate that shows date 
+            // ({Binding Key, StringFormat='{0:D}'}), the data needs to be grouped by DateTime.Date.
+
+            //var groupedData = forecast.Items
+            //    .GroupBy(item => item.DateTime.Date)
+            //    .Select(group => new Grouping<DateTime, ForecastItem>(group.Key, group))
+            //    .ToList();
+
+            var groupedData = forecast.Items
+            .GroupBy(item => item.DateTime.Date)           // Group by DATE (2026-01-28)
+            .OrderBy(g => g.Key)                           // Sort days ascending
+            .Select(g => new
+            {
+                Key = g.Key,                               // DateTime (används i GroupHeader)
+                Items = g.OrderBy(item => item.DateTime)   // sortera timmar inom dagen
+            })
+            .ToList();
+
+            // 3. Koppla datan till ListView i XAML
+            GroupedForecast.ItemsSource = groupedData;
         }
     }
+    //public class Grouping<K, T> : List<T>
+    //{
+    //    public K Key { get; private set; }
+    //    public Grouping(K key, IEnumerable<T> items)
+    //    {
+    //        Key = key;
+    //        this.AddRange(items);
+    //    }
+    //}
 }
