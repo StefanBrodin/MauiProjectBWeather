@@ -1,4 +1,5 @@
-﻿using MauiProjectBWeather.Models;
+﻿using MauiProjectBWeather.Helpers;
+using MauiProjectBWeather.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
@@ -128,7 +129,7 @@ namespace MauiProjectBWeather.Services
                             DateTime = UnixTimeStampToDateTime(item.dt),
                             Temperature = item.main?.temp,
                             WindSpeed = item.wind?.speed,
-                            Description = item.weather.FirstOrDefault()?.description,
+                            Description = item.weather.FirstOrDefault()?.description?.FirstCharToUpper(),
                             Icon = item.weather.FirstOrDefault()?.icon is string icon
                                 ? $"http://openweathermap.org/img/w/{icon}.png"
                                 : null

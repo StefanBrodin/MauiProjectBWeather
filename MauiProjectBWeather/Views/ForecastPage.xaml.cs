@@ -10,11 +10,11 @@ using MauiProjectBWeather.Services;
 
 namespace MauiProjectBWeather.Views
 {
-    public class GroupedForecast
-    {
-        public string City { get; set; }
-        public IEnumerable<IGrouping<DateTime, ForecastItem>> Items { get; set; }
-    }
+    //public class GroupedForecast
+    //{
+    //    public string City { get; set; }
+    //    public IEnumerable<IGrouping<DateTime, ForecastItem>> Items { get; set; }
+    //}
 
     public partial class ForecastPage : ContentPage
     {
@@ -49,32 +49,32 @@ namespace MauiProjectBWeather.Views
             // 2. Since IsGroupingEnabled="true" in the XAML ListView, and has a GroupHeaderTemplate that shows date 
             // ({Binding Key, StringFormat='{0:D}'}), the data needs to be grouped by DateTime.Date.
 
-            //var groupedData = forecast.Items
-            //    .GroupBy(item => item.DateTime.Date)
-            //    .Select(group => new Grouping<DateTime, ForecastItem>(group.Key, group))
-            //    .ToList();
-
             var groupedData = forecast.Items
-            .GroupBy(item => item.DateTime.Date)           // Group by DATE (2026-01-28)
-            .OrderBy(g => g.Key)                           // Sort days ascending
-            .Select(g => new
-            {
-                Key = g.Key,                               // DateTime (används i GroupHeader)
-                Items = g.OrderBy(item => item.DateTime)   // sortera timmar inom dagen
-            })
-            .ToList();
+                .GroupBy(item => item.DateTime.Date)
+                .Select(group => new Grouping<DateTime, ForecastItem>(group.Key, group))
+                .ToList();
 
-            // 3. Koppla datan till ListView i XAML
+            //var groupedData = forecast.Items
+            //.GroupBy(item => item.DateTime.Date)           // Group by DATE (2026-01-28)
+            //.OrderBy(g => g.Key)                           // Sort days ascending
+            //.Select(g => new
+            //{
+            //    Key = g.Key,                               // DateTime (Used in Group Header)
+            //    Items = g.OrderBy(item => item.DateTime)   // sort hours within day
+            //})
+            //.ToList();
+
+            // 3. Connect the data to ListView i XAML
             GroupedForecast.ItemsSource = groupedData;
         }
     }
-    //public class Grouping<K, T> : List<T>
-    //{
-    //    public K Key { get; private set; }
-    //    public Grouping(K key, IEnumerable<T> items)
-    //    {
-    //        Key = key;
-    //        this.AddRange(items);
-    //    }
-    //}
+    public class Grouping<K, T> : List<T>
+    {
+        public K Key { get; private set; }
+        public Grouping(K key, IEnumerable<T> items)
+        {
+            Key = key;
+            this.AddRange(items);
+        }
+    }
 }
