@@ -9,19 +9,19 @@ namespace MauiProjectBWeather
         {
             InitializeComponent();
 
-            // Vi loopar igenom hela listan med städer i CityPicture-modellen
+            // Looping through the list of cities to create a ShellContent for each
             foreach (var city in CityPicture.List)
             {
                 var sc = new ShellContent
                 {
                     Title = city.Name,
-                    // Vi skapar en unik route baserat på namnet (utan mellanslag)
+                    // Create a route based on the city name (lowercase, no spaces)
                     Route = city.Name.ToLower().Replace(" ", ""),
-                    // Här skapar vi sidan och skickar med just den här stadens objekt
+                    // Create the ContentTemplate to point to ForecastPage with the city as parameter
                     ContentTemplate = new DataTemplate(() => new ForecastPage(city))
                 };
 
-                // Lägg till staden i Shell-menyn (Items)
+                // Add the city to the shell menu 
                 this.Items.Add(sc);
             }
         }

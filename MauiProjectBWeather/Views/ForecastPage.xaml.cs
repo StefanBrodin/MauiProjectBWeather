@@ -1,4 +1,7 @@
-﻿using MauiProjectBWeather.Helpers;
+﻿// Stefan Brodin
+// https://github.com/StefanBrodin/MauiProjectBWeather.git
+
+using MauiProjectBWeather.Helpers;
 using MauiProjectBWeather.Models;
 using MauiProjectBWeather.Services;
 using System;
@@ -42,7 +45,7 @@ namespace MauiProjectBWeather.Views
             Forecast forecast = await _service.GetForecastAsync(_city.Name);
 
             // 2. Since IsGroupingEnabled="true" in the XAML ListView, and has a GroupHeaderTemplate that shows date 
-            // ({Binding Key, StringFormat='{0:D}'}), the data needs to be grouped by DateTime.Date.
+            // ({Binding Key, StringFormat='{0:D}'}), the data needs to be grouped by DateTime.
 
             var groupedData = forecast.Items
                 .GroupBy(item => item.DateTime.Date)

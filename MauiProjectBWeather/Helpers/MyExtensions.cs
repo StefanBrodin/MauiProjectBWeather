@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Stefan Brodin
+// https://github.com/StefanBrodin/MauiProjectBWeather.git
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
