@@ -12,9 +12,9 @@
                         <ViewCell Height="40">
                             <Grid HeightRequest="40" BackgroundColor="White" Padding="5">
                                 <Label FontSize="24" 
-                                    TextColor="DarkBlue" 
-                                    VerticalOptions="Center" 
-                                    Text="{Binding Key, StringFormat='{0:dddd \'den\' d MMMM yyyy}'}" />
+                                       TextColor="DarkBlue" 
+                                       VerticalOptions="Center" 
+                                       Text="{Binding FormattedDate}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

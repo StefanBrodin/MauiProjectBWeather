@@ -1,20 +1,15 @@
-﻿using System;
+﻿using MauiProjectBWeather.Helpers;
+using MauiProjectBWeather.Models;
+using MauiProjectBWeather.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-using MauiProjectBWeather.Models;
-using MauiProjectBWeather.Services;
-
 namespace MauiProjectBWeather.Views
 {
-    //public class GroupedForecast
-    //{
-    //    public string City { get; set; }
-    //    public IEnumerable<IGrouping<DateTime, ForecastItem>> Items { get; set; }
-    //}
 
     public partial class ForecastPage : ContentPage
     {
@@ -54,16 +49,6 @@ namespace MauiProjectBWeather.Views
                 .Select(group => new Grouping<DateTime, ForecastItem>(group.Key, group))
                 .ToList();
 
-            //var groupedData = forecast.Items
-            //.GroupBy(item => item.DateTime.Date)           // Group by DATE (2026-01-28)
-            //.OrderBy(g => g.Key)                           // Sort days ascending
-            //.Select(g => new
-            //{
-            //    Key = g.Key,                               // DateTime (Used in Group Header)
-            //    Items = g.OrderBy(item => item.DateTime)   // sort hours within day
-            //})
-            //.ToList();
-
             // 3. Connect the data to ListView i XAML
             GroupedForecast.ItemsSource = groupedData;
         }
@@ -71,6 +56,12 @@ namespace MauiProjectBWeather.Views
     public class Grouping<K, T> : List<T>
     {
         public K Key { get; private set; }
+
+        // This line fixes the formatting of the date with capital letter in the Group Header
+        public string FormattedDate => Key is DateTime dt
+            ? dt.ToString("dddd 'den' d MMMM yyyy").FirstCharToUpper()
+            : Key?.ToString();
+
         public Grouping(K key, IEnumerable<T> items)
         {
             Key = key;
